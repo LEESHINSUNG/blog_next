@@ -1,7 +1,3 @@
-import React from 'react'
-
 export default function PostsPage() {
-  return (
-    <div>PostsPage</div>
-  )
+  return <p>포스트들!</p>;
 }

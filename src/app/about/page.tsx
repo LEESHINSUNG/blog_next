@@ -1,7 +1,3 @@
-import React from 'react'
-
 export default function AboutPage() {
-  return (
-    <div>about page</div>
-  )
+  return <p>나에 대해!</p>;
 }

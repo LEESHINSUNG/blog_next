@@ -1,6 +1,10 @@
 import Link from "next/link";
 import "./globals.css";
-import styles from './page.module.css'
+import { Open_Sans } from "next/font/google";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+
+const sans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -13,31 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={sans.className}>
       <body>
-        <section className={styles.top}>
-          <Link href={"/"}>
-            <h1>Hoodie's blog</h1>
-          </Link>
-          <nav>
-            <ul>
-              <Link href={"/"}>
-                <li>home</li>
-              </Link>
-              <Link href={"/about"}>
-                <li>about</li>
-              </Link>
-              <Link href={"/posts"}>
-                <li>posts</li>
-              </Link>
-              <Link href={"/contact"}>
-                <li>contact</li>
-              </Link>
-            </ul>
-          </nav>
-        </section>
-        {children}
-        <footer className={styles.footer}>hello everyone</footer>
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
