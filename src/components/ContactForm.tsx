@@ -1,5 +1,6 @@
 "use client";
 
+import { sendContactEmail } from "@/service/contact";
 import { ChangeEvent, FormEvent, useState } from "react";
 import Banner, { BannerData } from "./Banner";
 
@@ -9,10 +10,10 @@ type Form = {
   message: string;
 };
 
-const INITIAL_FORM_DATA: Form = { from: "", subject: "", message: "" };
+const DEFAULT_DATA: Form = { from: "", subject: "", message: "" };
 
 export default function ContactForm() {
-  const [form, setForm] = useState(INITIAL_FORM_DATA);
+  const [form, setForm] = useState(DEFAULT_DATA);
   const [banner, setBanner] = useState<BannerData | null>(null);
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -22,11 +23,25 @@ export default function ContactForm() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ form });
-    setBanner({ message: "성공했어!", state: "success" });
-    setTimeout(() => {
-      setBanner(null);
-    }, 3000);
+    sendContactEmail(form) //
+      .then(() => {
+        setBanner({
+          message: "메일을 성공적으로 보냈습니다!",
+          state: "success",
+        });
+        setForm(DEFAULT_DATA);
+      })
+      .catch(() => {
+        setBanner({
+          message: "메일을 성공적으로 보냈습니다!",
+          state: "success",
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setBanner(null);
+        }, 3000);
+      });
   };
 
   return (
@@ -47,6 +62,7 @@ export default function ContactForm() {
           autoFocus
           value={form.from}
           onChange={onChange}
+          className="text-black"
         />
         <label htmlFor="subject" className="font-semibold">
           subject
