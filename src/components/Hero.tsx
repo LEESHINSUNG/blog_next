@@ -13,7 +13,7 @@ export default function Hero() {
         height={250}
         priority
       />
-      <h2 className="text-3xl font-bold mt-2">Hi, I'm Hoodie</h2>
+      <h2 className="text-3xl font-bold mt-2">Hi, I&apos;m Hoodie</h2>
       <h3 className="text-xl font-semibold">Full-stack Engineer</h3>
       <p>매일 성장하는 개발자 후디</p>
       <Link href="/contact">
